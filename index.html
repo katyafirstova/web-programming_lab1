@@ -41,20 +41,20 @@
                 </h3>
                 <div>
                     <label class="required" for="button" data-required="Выберите X"></label>
-                    <button name="x" id="button" class="button1" title="x не выбран"> -5</button>
-                    <button name="x" class="button2" title="x не выбран"> -4</button>
-                    <button name="x" class="button3" title="x не выбран"> -3</button>
+                    <button name="x" id="button" class="button1" value="-5"> -5</button>
+                    <button name="x" class="button2" value="-4"> -4</button>
+                    <button name="x" class="button3" value="-3"> -3</button>
                     <br>
-                    <button name="x" class="button1" title="x не выбран"> -2</button>
-                    <button name="x" class="button2" title="x не выбран"> -1</button>
-                    <button name="x" class="button3" title="x не выбран"> 0</button>
+                    <button name="x" class="button1" value="-2"> -2</button>
+                    <button name="x" class="button2" value="-1"> -1</button>
+                    <button name="x" class="button3" value="0"> 0</button>
                     <br>
-                    <button name="x" class="button1" title="x не выбран"> 1</button>
-                    <button name="x" class="button2" title="x не выбран"> 2</button>
-                    <button name="x" class="button3" title="x не выбран"> 3</button>
-                    <span class="xError" aria-live="polite"></span>
+                    <button name="x" class="button1" value="1"> 1</button>
+                    <button name="x" class="button2" value="2"> 2</button>
+                    <button name="x" class="button3" value="3"> 3</button>
                     <br><br>
                 </div>
+                <div class="error" id="xError"></div>
                 <h3>
                     Y:
                 </h3>
@@ -72,7 +72,7 @@
                         <span class="yError" aria-live="polite"></span>
                     </div>
 
-                    <br><br><br><br>
+                    <br><br><br><br><br>
                 </div>
 
                 <h3>
@@ -89,12 +89,48 @@
                         <option value="3">3</option>
                     </select>
                 </div>
-                <input type="button" id="form1" class="btn" value="Submit">
+                <input type="button" id="submit" class="btn" value="Submit">
                 <div id="response"></div>
             </form>
             <script src="validation.js"></script>
         </td>
     </tr>
+
+    <tr id="tr-result">
+        <td rowspan="2">
+            <table id="result-table">
+                <thead>
+                <tr>
+                    <th>x</th>
+                    <th>y</th>
+                    <th>r</th>
+                    <th>Точка входит в ОДЗ</th>
+                    <th>Текущее время</th>
+                    <th>Время работы скрипта</th>
+                </tr>
+                </thead>
+                <tbody id="result-table_body">
+                <?php
+                                session_start();
+                                if (isset($_SESSION['sessionTable'])) {
+                                    foreach ($_SESSION['sessionTable'] as $sessionTable)) { ?>
+                <tr>
+                    <th><?php echo $sessionTable)[0] ?></th>
+                    <th><?php echo $sessionTable)[1] ?></th>
+                    <th><?php echo $sessionTable)[2] ?></th>
+                    <th><?php echo $sessionTable)[3] ?></th>
+                    <th><?php echo $sessionTable)[4] ?></th>
+                    <th><?php echo $sessionTable)[5] ?></th>
+                </tr>
+                <?php }} ?>
+            </tbody>
+            </table>
 </table>
+</td>
+
+</tr>
+
+
 </body>
+</html>
         

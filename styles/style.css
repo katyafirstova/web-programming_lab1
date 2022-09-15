@@ -12,6 +12,11 @@ table {
     border-spacing: 30px 0;
 }
 
+#result-table {
+    margin-right: 30px;
+}
+
+
 h3 {
     margin-left: 50px;
 }

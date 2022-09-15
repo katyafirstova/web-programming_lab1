@@ -65,7 +65,7 @@
 }
 
 
-#form1 {
+#submit {
     background-color: #B0C4DE;
     margin-top: 50px;
     margin-left: 20%;
@@ -77,7 +77,11 @@
     letter-spacing: 2px;
 }
 
-
+#xError {
+    color: red;
+    font-size: 90%;
+    margin-left: 50px;
+}
 
 
 /*svg {*/

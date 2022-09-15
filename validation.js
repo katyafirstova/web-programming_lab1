@@ -4,9 +4,10 @@ let x = form.elements.namedItem("x");
 let y = form.elements.namedItem("y");
 let r = form.elements.namedItem("r");
 let xError = document.getElementsByClassName("xError");
+let submitForm = $('#submit');
+let result;
 
 const pass_reg = /(^-[123]$)|(^[012345]$)/;
-
 
 window.onload = function () {
 
@@ -15,7 +16,7 @@ window.onload = function () {
 
     function click(element) {
         element.onclick = function () {
-            x = this.value;
+             x = element.value;
             buttons.forEach(function (element) {
                 element.style.boxShadow = "";
                 element.style.transform = "";
@@ -26,19 +27,19 @@ window.onload = function () {
         return true;
     }
 
-    x.onblur = function () {
-        if (x.value == null) {
-            xError.innerHTML = 'Выберите значение X'
-            this.classList.add("xError");
-            y.classList.add('invalid');
+
+    function validateX() {
+        if(x.value === "") {
+            printError("xError", "выберите x");
+        } else {
+            printError("xError", "");
+            xError = false;
         }
-    };
-    x.onfocus = function () {
-        if (this.classList.contains('invalid')) {
-            this.classList.remove('invalid');
-            xError.innerHTML = "";
-        }
-    };
+    }
+
+    submitForm.on('click', function () {
+        validateX();
+    });
 };
 
 form.addEventListener('submit', function (e) {
@@ -47,31 +48,34 @@ form.addEventListener('submit', function (e) {
     return true;
 });
 
-form.addEventListener('submit', (e) =>{
-    e.preventDefault();
+function printError(elemId, hintMsg) {
+    document.getElementById(elemId).innerHTML = hintMsg;
+}
 
+
+
+submitForm.on('click', function () {
     checkIfBlank();
 });
 
 function checkIfBlank() {
-    let yValue = y.value.trim();
+    let yValue = y.value;
     if (yValue === '') {
-        setErrorFor(y, 'y cannot be blank');
+        setErrorFor(y, 'поле не может быть пустым');
     } else {
         setSuccessFor(y);
     }
-
 }
 
 function setErrorFor(input, message) {
-    const formControl = input.parentElement; //.form-control
+    const formControl = input.parentElement;
     const small = formControl.querySelector('small');
 
     small.innerText = message;
     formControl.className = 'form-control error';
 }
 
-function setSuccessFor(input, message) {
+function setSuccessFor(input) {
     const formControl = input.parentElement;
 
     formControl.className = 'form-control success';
@@ -83,6 +87,7 @@ function validateY(e) {
         if (pass_reg.test(e.target.value)) {
             e.target.classList.add('valid');
             e.target.classList.remove('invalid');
+            y.value = e.target.value;
         } else {
             e.target.classList.add('invalid');
             e.target.classList.remove('valid');
@@ -93,9 +98,7 @@ function validateY(e) {
 y.addEventListener('input', validateY);
 
 
-let form1 = $('#form1');
-
-form1.on('click', function () {
+submitForm.on('click', function () {
     validateR();
 });
 
@@ -110,70 +113,70 @@ function validateR() {
     } else {
         label.removeClass('reallyRequired');
     }
+    r = selectedVal.val();
+
 }
 
+document.getElementById("submit").onclick = function () {
+    $.ajax({
+        type: 'GET',
+        url: 'main.php',
+        data: {'x': x, 'y': y.value, 'r': r},
+        dataType: "json",
 
-// function validateX(elem) {
-//     let label = $('label');
-//     let val =
-//     if(isNaN(elem.value())) {
-//         // elem.setAttribute("aria-invalid", true);
-//         // x.classList.add("active");
-//         // x.innerHTML = x.getAttribute("title")
-//
-//         alert("no x")
-//
-//     }
-//     else elem.removeAttribute("aria-invalid");
-// }
-//
-// form1.on('click', function () {
-//     validateX();
-// });
+    });
 
-//
-// let xError = x.parentElement.querySelector(".xError");
-// if (click(x) === false) {
-//     x.setAttribute("aria-invalid", true);
-//     xError.classList.add("active");
-//     xError.innerHTML = x.getAttribute("title");
-// } else {
-//     x.removeAttribute("aria-invalid");
-//     xError.innerHTML = "";
-//     xError.classList.remove("active");
-//     x = this.value;
-// }
+    $.get("main.php", function (data) {
+        {
+            result = data;
+            let array = result.split(" . ");
+            add_table(array[0], array[1], array[2], array[3], array[4], array[5]);
+        }
+    })
+}
+
+    function add_table(x, y, r, result, current_time, computation_time) {
+        let tbody = document.getElementById('result-table').getElementsByTagName('TBODY')[0];
+        let row = document.createElement("TR");
+        tbody.appendChild(row);
+
+        let td1 = document.createElement("TH");
+        let td2 = document.createElement("TH");
+        let td3 = document.createElement("TH");
+        let td4 = document.createElement("TH");
+        let td5 = document.createElement("TH");
+        let td6 = document.createElement("TH");
 
 
-// document.getElementById("form1").oncanplay = function () {
-//         $.ajax({
-//             type: 'GET',
-//             url: 'main.php',
-//             data: {'x': x, 'y': y, 'r': r},
-//             dataType: "json",
-//
-//         });
-// }
+        row.appendChild(td1);
+        row.appendChild(td2);
+        row.appendChild(td3);
+        row.appendChild(td4);
+        row.appendChild(td5);
+        row.appendChild(td6);
 
-// $('#form').submit(function() {
-//     $.ajax({
-//         type: "GET",
-//         url: "main.php",
-//         data: {
-//             "x": x, "y": y, "r": r,
-//             success: function (html) {
-//                 $("#content").html(html);
-//             }
-//         }
-//     });
-// });
-//
-// function send() {
-//     let params = new URLSearchParams('x=' + x + '&y=' + y + "&r=" + r);
-//         fetch("main.php", {
-//             method: "GET",
-//             body: params
-//         })}
+
+        y = document.getElementById("y").value;
+        r = document.getElementById("select").value;
+        let xxx;
+
+        let btn = document.getElementsByName('x');
+        for (let i = 0; i < btn.length; i++) {
+            if (btn[i].value !== null) {
+                xxx = btn[i].value;
+            }
+        }
+
+        td1.innerHTML = xxx;
+        td2.innerHTML = y;
+        td3.innerHTML = r;
+        td4.innerHTML = result;
+        td5.innerHTML = current_time;
+        td6.innerHTML = computation_time;
+
+
+    }
+
 
 
 
