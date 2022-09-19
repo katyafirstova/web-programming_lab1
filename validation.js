@@ -7,6 +7,7 @@ let xError = document.getElementsByClassName("xError");
 let submitForm = $('#submit');
 let result;
 
+
 const pass_reg = /(^-[123]$)|(^[012345]$)/;
 
 window.onload = function () {
@@ -16,7 +17,7 @@ window.onload = function () {
 
     function click(element) {
         element.onclick = function () {
-             x = element.value;
+            x = element.value;
             buttons.forEach(function (element) {
                 element.style.boxShadow = "";
                 element.style.transform = "";
@@ -29,7 +30,7 @@ window.onload = function () {
 
 
     function validateX() {
-        if(x.value === "") {
+        if (x.value === "") {
             printError("xError", "выберите x");
         } else {
             printError("xError", "");
@@ -51,7 +52,6 @@ form.addEventListener('submit', function (e) {
 function printError(elemId, hintMsg) {
     document.getElementById(elemId).innerHTML = hintMsg;
 }
-
 
 
 submitForm.on('click', function () {
@@ -115,7 +115,9 @@ function validateR() {
     }
     r = selectedVal.val();
 
+
 }
+
 
 document.getElementById("submit").onclick = function () {
     $.ajax({
@@ -125,57 +127,62 @@ document.getElementById("submit").onclick = function () {
         dataType: "json",
 
     });
-
-    $.get("main.php", function (data) {
-        {
-            result = data;
-            let array = result.split(" . ");
-            add_table(array[0], array[1], array[2], array[3], array[4], array[5]);
-        }
-    })
 }
 
-    function add_table(x, y, r, result, current_time, computation_time) {
-        let tbody = document.getElementById('result-table').getElementsByTagName('TBODY')[0];
-        let row = document.createElement("TR");
-        tbody.appendChild(row);
 
-        let td1 = document.createElement("TH");
-        let td2 = document.createElement("TH");
-        let td3 = document.createElement("TH");
-        let td4 = document.createElement("TH");
-        let td5 = document.createElement("TH");
-        let td6 = document.createElement("TH");
+    function getTable() {
+        document.getElementById("submit").onclick = function () {
+
+            $.get('main.php', function (data) {
+                result = data;
+                let array = result;
+                add_table(array[0], array[1], array[2], array[3], array[4], array[5]);
+            })
+
+            function add_table(x, y, r, res, current_time, computation_time) {
+                if (res === undefined) {
+                    alert(" ");
+                } else {
+                    let tbody = document.getElementById('result-table').getElementsByTagName('TBODY')[0];
+                    let row = document.createElement("TR");
+                    tbody.appendChild(row);
+
+                    let td1 = document.createElement("TH");
+                    let td2 = document.createElement("TH");
+                    let td3 = document.createElement("TH");
+                    let td4 = document.createElement("TH");
+                    let td5 = document.createElement("TH");
+                    let td6 = document.createElement("TH");
+
+                    row.appendChild(td1);
+                    row.appendChild(td2);
+                    row.appendChild(td3);
+                    row.appendChild(td4);
+                    row.appendChild(td5);
+                    row.appendChild(td6);
 
 
-        row.appendChild(td1);
-        row.appendChild(td2);
-        row.appendChild(td3);
-        row.appendChild(td4);
-        row.appendChild(td5);
-        row.appendChild(td6);
+                    y = document.getElementById("y").value;
+                    r = document.getElementById("select").value;
 
 
-        y = document.getElementById("y").value;
-        r = document.getElementById("select").value;
-        let xxx;
+                    $("button").click(function () {
+                        td1.innerHTML = $(this).value;
+                    });
 
-        let btn = document.getElementsByName('x');
-        for (let i = 0; i < btn.length; i++) {
-            if (btn[i].value !== null) {
-                xxx = btn[i].value;
+                    td2.innerHTML = y;
+                    td3.innerHTML = r;
+                    td4.innerHTML = res;
+                    td5.innerHTML = current_time;
+                    td6.innerHTML = computation_time;
+                }
+
+
             }
         }
-
-        td1.innerHTML = xxx;
-        td2.innerHTML = y;
-        td3.innerHTML = r;
-        td4.innerHTML = result;
-        td5.innerHTML = current_time;
-        td6.innerHTML = computation_time;
-
-
     }
+
+
 
 
 

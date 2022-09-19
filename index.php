@@ -13,6 +13,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src='https://code.jquery.com/jquery-3.6.1.min.js'></script>
+
 </head>
 
 <body>
@@ -35,7 +36,7 @@
                 <img src="./img/img.png" alt="img">
             </figure>
 
-            <form id="form" action=main.php method="GET">
+            <form id="form" onsubmit="getTable()">
                 <h3>
                     X:
                 </h3>
@@ -93,40 +94,68 @@
                 <div id="response"></div>
             </form>
             <script src="validation.js"></script>
+            <script src="table.js"></script>
         </td>
     </tr>
+</table>
 
-    <tr id="tr-result">
-        <td rowspan="2">
-            <table id="result-table">
-                <thead>
-                <tr>
-                    <th>x</th>
-                    <th>y</th>
-                    <th>r</th>
-                    <th>Точка входит в ОДЗ</th>
-                    <th>Текущее время</th>
-                    <th>Время работы скрипта</th>
-                </tr>
-                </thead>
-                <tbody id="result-table_body">
-                <?php
-                                session_start();
-                                if (isset($_SESSION['sessionTable'])) {
-                                    foreach ($_SESSION['sessionTable'] as $sessionTable)) { ?>
-                <tr>
-                    <th><?php echo $sessionTable)[0] ?></th>
-                    <th><?php echo $sessionTable)[1] ?></th>
-                    <th><?php echo $sessionTable)[2] ?></th>
-                    <th><?php echo $sessionTable)[3] ?></th>
-                    <th><?php echo $sessionTable)[4] ?></th>
-                    <th><?php echo $sessionTable)[5] ?></th>
-                </tr>
+
+<tr id="tr-result">
+    <td rowspan="2">
+        <table id="result-table">
+            <thead>
+            <tr>
+                <th scope="col">X</th>
+                <th scope="col">Y</th>
+                <th scope="col">R</th>
+                <th scope="col">Результат</th>
+                <th scope="col">Current Time</th>
+                <th scope="col">Computation Time</th>
+            </tr>
+            </thead>
+            <tbody id="results_table_body">
+            <!--<tr id="no_result"><th colspan="4">Нет результатов</th></tr>-->
+            <?php
+            session_start();
+            $start = microtime(true);
+
+            date_default_timezone_set('Europe/Moscow');
+            $currentTime = date('H:i:s');
+            $executionTime = number_format(microtime(true) - $start, 6);
+
+            $x = $_GET['x'];
+            $y = $_GET['y'];
+            $r = $_GET['r'];
+            $check = false;
+            $result = null;
+            $res = null;
+
+            if (is_numeric($x) && is_numeric($r) && ($y > -5 && $y < 3)) $check = true;
+
+
+            if (($x < 1.5 && $r >= 0 && $r <= 1.5 && $y >= -3 && $y <= 0) || ($r >= 0 && $r <= 1.5 && $x >= 0
+                    && $x <= 3 && $y >= 0 && $y <= 1.5) || ($r >= 0 && $r <= 3 && $x >= 0 && $x <= 3 &&
+                    $y >= -3 && $y <= 0)) {
+                $res = "да";
+            } else {
+                $res = "нет";
+            }
+            if (isset($_SESSION['results'])) {
+                foreach ($_SESSION['results'] as $result) { ?>
+                    <tr>
+                        <th><?php echo $result[0] ?></th>
+                        <th><?php echo $result[1] ?></th>
+                        <th><?php echo $result[2] ?></th>
+                        <th><?php echo $result[3] ?></th>
+                        <th><?php echo $result[4] ?></th>
+                        <th><?php echo $result[5] ?></th>
+                    </tr>
                 <?php }} ?>
             </tbody>
-            </table>
-</table>
-</td>
+
+
+        </table>
+    </td>
 
 </tr>
 
