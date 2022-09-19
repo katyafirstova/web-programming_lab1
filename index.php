@@ -116,7 +116,6 @@
             <tbody id="results_table_body">
 
             <?php
-            session_start();
             if (isset($_SESSION['sessionTable'])) {
                 foreach ($_SESSION['sessionTable'] as $sessionTable) { ?>
                     <tr>
