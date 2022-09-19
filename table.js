@@ -22,20 +22,12 @@ document.getElementById("submit").onclick = function () {
 
     function add_table(x, y, r, res, current_time, computation_time) {
 
-        // Находим нужную таблицу
         let tbody = d.getElementById('result-table').getElementsByTagName('TBODY')[0];
-        // Создаем строку таблицы и добавляем ее
         let row = d.createElement("TR");
         tbody.appendChild(row);
 
-        //if (first) {
-        //    first = false;
-        //    d.getElementById("no_result").remove();
-        //}
 
 
-        // Создаем ячейки в вышесозданной строке
-        // и добавляем тх
         let td1 = d.createElement("TH");
         let td2 = d.createElement("TH");
         let td3 = d.createElement("TH");
@@ -51,8 +43,6 @@ document.getElementById("submit").onclick = function () {
         row.appendChild(td6);
 
 
-
-        // Наполняем ячейки
         td1.innerHTML = x;
         td2.innerHTML = y;
         td3.innerHTML = r;
