@@ -118,20 +118,19 @@ function validateR() {
 }
 
 
-
-    // function sendData() {
-    //     $.ajax({
-    //         type: 'GET',
-    //         url: 'index.php',
-    //         data: {'x': x, 'y': y.value, 'r': r},
-    //         dataType: "json",
-    //
-    //     });
-    //
-    //
-    //
-    //
-    // }
+// function sendData() {
+//     $.ajax({
+//         type: 'GET',
+//         url: 'index.php',
+//         data: {'x': x, 'y': y.value, 'r': r},
+//         dataType: "json",
+//
+//     });
+//
+//
+//
+//
+// }
 
 
 

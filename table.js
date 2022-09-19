@@ -51,6 +51,7 @@ document.getElementById("submit").onclick = function () {
         row.appendChild(td6);
 
 
+
         // Наполняем ячейки
         td1.innerHTML = x;
         td2.innerHTML = y;
