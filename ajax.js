@@ -1,17 +1,5 @@
-var o = document.getElementById('submit');
-
 function ajaxRequest() {
-    try {
-        var request = new XMLHttpRequest()
-    } catch (e) {
-        request = false
-    }
-    return request
-
-}
-
-function check() {
-    request = new ajaxRequest();
+    let request = new ajaxRequest();
     request.open("GET", "check.php", true);
     request.onreadystatechange = function () {
         if (this.readyState === 4) {
