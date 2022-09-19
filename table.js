@@ -17,6 +17,7 @@ document.getElementById("submit").onclick = function () {
             let array;
             array = result.split("#");
             add_table(array[0], array[1], array[2], array[3], array[4], array[5]);
+
         })
 
     function add_table(x, y, r, res, current_time, computation_time) {
