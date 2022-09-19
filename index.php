@@ -36,7 +36,7 @@
                 <img src="./img/img.png" alt="img">
             </figure>
 
-            <form id="form" onsubmit="getTable()">
+            <form id="form" action="index.php" method="get">
                 <h3>
                     X:
                 </h3>
@@ -114,52 +114,23 @@
             </tr>
             </thead>
             <tbody id="results_table_body">
-            <!--<tr id="no_result"><th colspan="4">Нет результатов</th></tr>-->
+
             <?php
             session_start();
-            $start = microtime(true);
-
-            date_default_timezone_set('Europe/Moscow');
-            $currentTime = date('H:i:s');
-            $executionTime = number_format(microtime(true) - $start, 6);
-
-            $x = $_GET['x'];
-            $y = $_GET['y'];
-            $r = $_GET['r'];
-            $check = false;
-            $result = null;
-            $res = null;
-
-            if (is_numeric($x) && is_numeric($r) && ($y > -5 && $y < 3)) $check = true;
-
-
-            if (($x < 1.5 && $r >= 0 && $r <= 1.5 && $y >= -3 && $y <= 0) || ($r >= 0 && $r <= 1.5 && $x >= 0
-                    && $x <= 3 && $y >= 0 && $y <= 1.5) || ($r >= 0 && $r <= 3 && $x >= 0 && $x <= 3 &&
-                    $y >= -3 && $y <= 0)) {
-                $res = "да";
-            } else {
-                $res = "нет";
-            }
-            if (isset($_SESSION['results'])) {
-                foreach ($_SESSION['results'] as $result) { ?>
+            if (isset($_SESSION['sessionTable'])) {
+                foreach ($_SESSION['sessionTable'] as $sessionTable) { ?>
                     <tr>
-                        <th><?php echo $result[0] ?></th>
-                        <th><?php echo $result[1] ?></th>
-                        <th><?php echo $result[2] ?></th>
-                        <th><?php echo $result[3] ?></th>
-                        <th><?php echo $result[4] ?></th>
-                        <th><?php echo $result[5] ?></th>
+                        <th><?php echo $sessionTable[0] ?></th>
+                        <th><?php echo $sessionTable[1] ?></th>
+                        <th><?php echo $sessionTable[2] ?></th>
+                        <th><?php echo $sessionTable[3] ?></th>
+                        <th><?php echo $sessionTable[4] ?></th>
+                        <th><?php echo $sessionTable[5] ?></th>
                     </tr>
+
                 <?php }} ?>
-            </tbody>
-
-
         </table>
     </td>
-
 </tr>
-
-
 </body>
 </html>
-        

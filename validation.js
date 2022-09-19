@@ -5,7 +5,6 @@ let y = form.elements.namedItem("y");
 let r = form.elements.namedItem("r");
 let xError = document.getElementsByClassName("xError");
 let submitForm = $('#submit');
-let result;
 
 
 const pass_reg = /(^-[123]$)|(^[012345]$)/;
@@ -119,73 +118,20 @@ function validateR() {
 }
 
 
-document.getElementById("submit").onclick = function () {
-    $.ajax({
-        type: 'GET',
-        url: 'main.php',
-        data: {'x': x, 'y': y.value, 'r': r},
-        dataType: "json",
 
-    });
-}
-
-
-    function getTable() {
-        document.getElementById("submit").onclick = function () {
-
-            $.get('main.php', function (data) {
-                result = data;
-                let array = result;
-                add_table(array[0], array[1], array[2], array[3], array[4], array[5]);
-            })
-
-            function add_table(x, y, r, res, current_time, computation_time) {
-                if (res === undefined) {
-                    alert(" ");
-                } else {
-                    let tbody = document.getElementById('result-table').getElementsByTagName('TBODY')[0];
-                    let row = document.createElement("TR");
-                    tbody.appendChild(row);
-
-                    let td1 = document.createElement("TH");
-                    let td2 = document.createElement("TH");
-                    let td3 = document.createElement("TH");
-                    let td4 = document.createElement("TH");
-                    let td5 = document.createElement("TH");
-                    let td6 = document.createElement("TH");
-
-                    row.appendChild(td1);
-                    row.appendChild(td2);
-                    row.appendChild(td3);
-                    row.appendChild(td4);
-                    row.appendChild(td5);
-                    row.appendChild(td6);
-
-
-                    y = document.getElementById("y").value;
-                    r = document.getElementById("select").value;
-
-
-                    $("button").click(function () {
-                        td1.innerHTML = $(this).value;
-                    });
-
-                    td2.innerHTML = y;
-                    td3.innerHTML = r;
-                    td4.innerHTML = res;
-                    td5.innerHTML = current_time;
-                    td6.innerHTML = computation_time;
-                }
-
-
-            }
-        }
-    }
-
-
-
-
-
+    // function sendData() {
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: 'index.php',
+    //         data: {'x': x, 'y': y.value, 'r': r},
+    //         dataType: "json",
+    //
+    //     });
+    //
+    //
+    //
+    //
+    // }
 
 
 
