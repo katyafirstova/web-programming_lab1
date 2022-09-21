@@ -29,37 +29,35 @@
 </header>
 
 
-<table>
+<table cos>
     <tr>
         <td>
             <figure align="right">
                 <img src="./img/img.png" alt="img">
             </figure>
 
-            <form id="form" action="index.php" method="get">
+            <form id="form">
                 <h3>
                     X:
                 </h3>
-                <div>
                     <label class="required" for="button" data-required="Выберите X"></label>
-                    <button name="x" id="button" class="button1" value="-5"> -5</button>
-                    <button name="x" class="button2" value="-4"> -4</button>
-                    <button name="x" class="button3" value="-3"> -3</button>
+                    <input type="button" name="x" class="button1" value="-5">
+                    <input type="button" name="x" class="button2" value="-4">
+                    <input type="button" name="x" class="button3" value="-3">
                     <br>
-                    <button name="x" class="button1" value="-2"> -2</button>
-                    <button name="x" class="button2" value="-1"> -1</button>
-                    <button name="x" class="button3" value="0"> 0</button>
+                    <input type="button" name="x" class="button1" value="-2">
+                    <input type="button" name="x" class="button2" value="-1">
+                    <input type="button" name="x" class="button3" value="0">
                     <br>
-                    <button name="x" class="button1" value="1"> 1</button>
-                    <button name="x" class="button2" value="2"> 2</button>
-                    <button name="x" class="button3" value="3"> 3</button>
+                    <input type="button" name="x" class="button1" value="1">
+                    <input type="button" name="x" class="button2" value="2">
+                    <input type="button" name="x" class="button3" value="3">
                     <br><br>
-                </div>
                 <div class="error" id="xError"></div>
                 <h3>
                     Y:
                 </h3>
-                <div>
+
                     <div class="form-control">
                         <label for="y"></label>
 
@@ -71,7 +69,6 @@
                         <span class="highlight"></span>
                         <span class="bar"></span>
                         <span class="yError" aria-live="polite"></span>
-                    </div>
 
                     <br><br><br><br><br>
                 </div>
@@ -79,7 +76,6 @@
                 <h3>
                     R:
                 </h3>
-                <div>
                     <label class="required" for="select" data-required="Выберите R"></label>
                     <select class="selectR" name="select" id="select">
                         <option selected="" name="R" disabled="disabled" value="">R</option>
@@ -89,25 +85,20 @@
                         <option value="2.5">2.5</option>
                         <option value="3">3</option>
                     </select>
-                </div>
-                <input type="button" id="submit" class="btn" value="Submit">
+                <input type="submit" id="submit" class="btn" value="Submit">
                 <div id="response"></div>
             </form>
             <script src="validation.js"></script>
-            <script src="table.js"></script>
         </td>
     </tr>
-</table>
 
 
 <tr id="tr-result">
-    <td rowspan="2">
+    <td>
         <table id="result-table">
             <thead>
             <tr>
-                <th scope="col">X</th>
-                <th scope="col">Y</th>
-                <th scope="col">R</th>
+                <th scope="col">XYR</th>
                 <th scope="col">Результат</th>
                 <th scope="col">Current Time</th>
                 <th scope="col">Computation Time</th>
@@ -116,20 +107,19 @@
             <tbody id="results_table_body">
 
             <?php
-            if (isset($_SESSION['sessionTable'])) {
-                foreach ($_SESSION['sessionTable'] as $sessionTable) { ?>
+            if (isset($_SESSION['results'])) {
+                foreach ($_SESSION['results'] as $result) { ?>
                     <tr>
-                        <th><?php echo $sessionTable[0] ?></th>
-                        <th><?php echo $sessionTable[1] ?></th>
-                        <th><?php echo $sessionTable[2] ?></th>
-                        <th><?php echo $sessionTable[3] ?></th>
-                        <th><?php echo $sessionTable[4] ?></th>
-                        <th><?php echo $sessionTable[5] ?></th>
+                        <th><?php echo $result[0] ?></th>
+                        <th><?php echo $result[1] ?></th>
+                        <th><?php echo $result[2] ?></th>
+                        <th><?php echo $result[3] ?></th>
                     </tr>
 
                 <?php }} ?>
         </table>
     </td>
 </tr>
+</table>
 </body>
 </html>

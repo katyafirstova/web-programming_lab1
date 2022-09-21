@@ -5,13 +5,14 @@ let y = form.elements.namedItem("y");
 let r = form.elements.namedItem("r");
 let xError = document.getElementsByClassName("xError");
 let submitForm = $('#submit');
+let X, Y, R, result;
 
 
 const pass_reg = /(^-[123]$)|(^[012345]$)/;
 
 window.onload = function () {
 
-    let buttons = document.querySelectorAll("button[name = x]");
+    let buttons = document.querySelectorAll("input[name = x]");
     buttons.forEach(click);
 
     function click(element) {
@@ -113,6 +114,48 @@ function validateR() {
         label.removeClass('reallyRequired');
     }
     r = selectedVal.val();
+}
+
+
+document.getElementById("submit").onclick = function () {
+
+    X = x;
+    Y = document.getElementById("y").value;
+    R = document.getElementById("select").value;
+
+    $.get('check.php', {x: X, y: Y, r: R}, function (data) {
+        result = data; // ответ от сервера
+        let array;
+        array = result.split("#");
+        add_table(array[0],  array[1], array[2], array[3]);
+
+    })
+
+    function add_table(xyr, res, current_time, computation_time) {
+
+        let tbody = document.getElementById('result-table').getElementsByTagName('TBODY')[0];
+        let row = document.createElement("TR");
+        tbody.appendChild(row);
+
+
+
+        let td1 = document.createElement("th");
+        let td2 = document.createElement("th");
+        let td3 = document.createElement("th");
+        let td4 = document.createElement("th");
+
+        row.appendChild(td1);
+        row.appendChild(td2);
+        row.appendChild(td3);
+        row.appendChild(td4);
+
+
+        td1.innerHTML = xyr;
+        td2.innerHTML = res;
+        td3.innerHTML = current_time;
+        td4.innerHTML = computation_time;
+    }
+
 
 
 }
