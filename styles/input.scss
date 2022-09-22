@@ -2,7 +2,8 @@
   font-size: 17px;
   padding: 10px 10px 10px 3px;
   margin-top: 20px;
-  margin-left: 250px;
+  margin-left: 600px;
+  margin-right: 550px;
   display: block;
   width: 280px;
   border: none;
@@ -27,16 +28,15 @@
 }
 
 .inputY:focus ~ label, input:valid ~ label {
-  margin-top: -70px;
-  margin-left: 250px;
+  margin-top: -30px;
+  margin-left: 600px;
   font-size: 14px;
   color: #5264AE;
 }
 
 .bar {
-
-  margin-top: -70px;
-  margin-left: 250px;
+  margin-top: -88px;
+  margin-left: 600px;
   position: relative;
   display: block;
   width: 295px;
@@ -94,7 +94,7 @@ input:focus ~ .highlight {
 
 .form-control i{
   position: absolute;
-  top: 40px;
+  top: 70px;
   right: 10px;
   visibility: hidden;
 }
@@ -103,18 +103,18 @@ input:focus ~ .highlight {
   visibility: visible;
 }
 .form-control.error i.fa-exclamation-circle {
-  color: #e74c3c;
+  color: red;
   visibility: visible;
 }
+
 .form-control small{
   visibility: hidden;
-  position: absolute;
-  margin-top: 5px;
-  margin-left: 50px;
+  margin-top: -225px;
+  margin-left:  20px;
 
 }
 .form-control.error small {
-  color: #e74c3c;
+  color: red;
   visibility: visible;
 }
 
