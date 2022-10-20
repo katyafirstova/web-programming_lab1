@@ -13,16 +13,21 @@ $y = $_GET['y'];
 $r = $_GET['r'];
 
 $check = false;
-$fail = "Некорректное значение переменных";
+
+
+$y= trim(preg_replace('/\s+/', ' ', $y));
+
+
+if (is_numeric($x) && is_numeric($r) && is_numeric($y) && preg_match("/(^-[123]$)|(^[012345]$)/", $y)) $check = true;
 
 
 
-if (is_numeric($x) && is_numeric($r) && is_numeric($y)) $check = true;
-elseif (!is_numeric($x) || $r = null || !($y > -5 && $y < 3)) die($fail);
 
 
 
-if($check) {
+
+
+    if($check) {
     function checkCoords($x, $y, $r): bool
     {
         if (($x < 1.5 && $r >= 0 && $r <= 1.5 && $y >= -3 && $y <= 0) || ($r >= 0 && $r <= 1.5 && $x >= 0
@@ -36,22 +41,21 @@ if($check) {
 }
 
 
-    if (checkCoords($x, $y, $r)) {
-        $result = array($x . ";" . $y . ";" . $r, "да", $currentTime, $executionTime);
+if (checkCoords($x, $y, $r)) {
+    $result = array($x . ";" . $y . ";" . $r, "да", $currentTime, $executionTime);
 
-        if (!isset($_SESSION['results'])) {
-            $_SESSION['results'] = array();
-        }
-        array_push($result);
-        echo $x . "; " . $y . "; " . $r . "#да#" . $currentTime . "#" . $executionTime;
-    } else {
-        $result = array($x . ";" . $y . ";" . $r, "нет", $currentTime, $executionTime);
-
-        if (!isset($_SESSION['results'])) {
-            $_SESSION['results'] = array();
-        }
-        array_push($result);
-        echo $x . "; " . $y . "; " . $r . "#нет#" . $currentTime . "#" . $executionTime;
+    if (!isset($_SESSION['results'])) {
+        $_SESSION['results'] = array();
     }
+    $_SESSION['results'][] = $result;
+    echo $x . "; " . $y . "; " . $r . "#да#" . $currentTime . "#" . $executionTime;
+} else {
+    $result = array($x . ";" . $y . ";" . $r, "нет", $currentTime, $executionTime);
 
+    if (!isset($_SESSION['results'])) {
+        $_SESSION['results'] = array();
+    }
+    $_SESSION['results'][] = $result;
+    echo $x . "; " . $y . "; " . $r . "#нет#" . $currentTime . "#" . $executionTime;
+}
 

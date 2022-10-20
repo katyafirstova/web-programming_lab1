@@ -9,7 +9,7 @@ body, html {
 }
 
 #result-table {
-   position: center;
+    position: center;
 }
 
 
@@ -40,13 +40,13 @@ header {
 
     font-size: 12px;
     color: black;
-    background-size:auto;
-    background-color:slategray;
+    background-size: auto;
+    background-color: slategray;
 
 }
 
 img {
-   margin-top: -1000px;
+    margin-top: -1000px;
     margin-left: -900px;
     width: 230px;
     height: 230px;
@@ -65,11 +65,12 @@ table {
     padding: 15px;
     text-align: center;
 }
+
 th, td, tr {
     border: 0 solid black;
     border-radius: 10px;
     background: beige;
-    margin-bottom: -50px ;
+    margin-bottom: -50px;
     text-align: center;
 
 }

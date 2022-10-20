@@ -43,6 +43,7 @@ window.onload = function () {
     });
 };
 
+
 form.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -58,8 +59,9 @@ submitForm.on('click', function () {
     checkIfBlank();
 });
 
+
 function checkIfBlank() {
-    let yValue = y.value;
+    let yValue = y.value.replace(/\D/g, '');
     if (yValue === '') {
         setErrorFor(y, 'поле не может быть пустым');
     } else {
@@ -77,22 +79,26 @@ function setErrorFor(input, message) {
 
 function setSuccessFor(input) {
     const formControl = input.parentElement;
-
     formControl.className = 'form-control success';
 
 }
 
+submitForm.on('click', function () {
+    validateY();
+});
+
 function validateY(e) {
-    if (e.target.name === "y") {
-        if (pass_reg.test(e.target.value)) {
+    if (e.target.name === "y")
+        if (pass_reg.test(e.target.value.replace(/\s/g, ''))) {
             e.target.classList.add('valid');
             e.target.classList.remove('invalid');
             y.value = e.target.value;
+            setSuccessFor(y);
         } else {
             e.target.classList.add('invalid');
             e.target.classList.remove('valid');
         }
-    }
+
 }
 
 y.addEventListener('input', validateY);
@@ -107,7 +113,6 @@ function validateR() {
     let selectedVal = $(".selectR");
     label.removeClass('reallyRequired');
     if (selectedVal.val() === "" || selectedVal.val() == null) {
-        selectedVal.focus();
         selectedVal.prev('label').addClass('reallyRequired');
         return false;
     } else {
@@ -117,6 +122,7 @@ function validateR() {
 }
 
 
+
 document.getElementById("submit").onclick = function () {
 
     X = x;
@@ -124,56 +130,43 @@ document.getElementById("submit").onclick = function () {
     R = document.getElementById("select").value;
 
     $.get('check.php', {x: X, y: Y, r: R}, function (data) {
-        result = data; // ответ от сервера
+        result = data;
         let array;
         array = result.split("#");
-        add_table(array[0],  array[1], array[2], array[3]);
+        add_table(array[0], array[1], array[2], array[3]);
 
-    })
+    });
 
-    function add_table(xyr, res, current_time, computation_time) {
+}
 
-        let tbody = document.getElementById('result-table').getElementsByTagName('TBODY')[0];
-        let row = document.createElement("TR");
-        tbody.appendChild(row);
+function add_table(xyr, res, current_time,computation_time) {
 
 
+    let tbody = document.getElementById('result-table').getElementsByTagName('TBODY')[0];
+    let row = document.createElement("TR");
+    tbody.appendChild(row);
 
-        let td1 = document.createElement("th");
-        let td2 = document.createElement("th");
-        let td3 = document.createElement("th");
-        let td4 = document.createElement("th");
+    let td1 = document.createElement("th");
+    let td2 = document.createElement("th");
+    let td3 = document.createElement("th");
+    let td4 = document.createElement("th");
 
-        row.appendChild(td1);
-        row.appendChild(td2);
-        row.appendChild(td3);
-        row.appendChild(td4);
+    row.appendChild(td1);
+    row.appendChild(td2);
+    row.appendChild(td3);
+    row.appendChild(td4);
 
-
-        td1.innerHTML = xyr;
-        td2.innerHTML = res;
-        td3.innerHTML = current_time;
-        td4.innerHTML = computation_time;
-    }
-
-
+    td1.innerHTML = xyr;
+    td2.innerHTML = res;
+    td3.innerHTML = current_time;
+    td4.innerHTML = computation_time;
 
 }
 
 
-// function sendData() {
-//     $.ajax({
-//         type: 'GET',
-//         url: 'index.php',
-//         data: {'x': x, 'y': y.value, 'r': r},
-//         dataType: "json",
-//
-//     });
-//
-//
-//
-//
-// }
+
+
+
 
 
 

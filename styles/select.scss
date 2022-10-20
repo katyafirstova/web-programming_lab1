@@ -1,12 +1,13 @@
 .reallyRequired {
   &:after {
-    color:red;
+    color: red;
     content: attr(data-required);
-    margin-left: 600px;
+    margin-left: 630px;
     margin-right: 600px;
   }
+
   & + select {
-    border:1px solid red;
+    border: 1px solid red;
   }
 }
 

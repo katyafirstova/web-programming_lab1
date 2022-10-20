@@ -12,7 +12,6 @@
     <title>web-1</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src='https://code.jquery.com/jquery-3.6.1.min.js'></script>
 
 </head>
 
@@ -31,7 +30,7 @@
 <table>
     <tr>
         <td>
-            <form id="form">
+            <form id="form" action="check.php" method="get">
                 <h3>
                     X:
                 </h3>
@@ -65,6 +64,7 @@
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <span class="yError" aria-live="polite"></span>
+                    <div class="yError" id="xError"></div>
 
                     <br><br><br><br><br>
                 </div>
@@ -84,9 +84,6 @@
                 </select>
                 <input type="submit" id="submit" class="btn" value="Submit">
                 <div id="response"></div>
-
-
-
 
 
             </form>
@@ -109,6 +106,7 @@
                 <tbody id="results_table_body">
 
                 <?php
+                session_start();
                 if (isset($_SESSION['results'])) {
                     foreach ($_SESSION['results'] as $result) { ?>
                         <tr>
@@ -117,9 +115,9 @@
                             <th><?php echo $result[2] ?></th>
                             <th><?php echo $result[3] ?></th>
                         </tr>
-
                     <?php }
                 } ?>
+
             </table>
         </td>
     </tr>

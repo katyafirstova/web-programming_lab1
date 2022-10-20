@@ -23,7 +23,9 @@
     background: red;
 }
 
-.xError { color: red }
+.xError {
+    color: red
+}
 
 .button1:hover,
 .button2:hover,
@@ -51,7 +53,7 @@
 
 .button1:active::after,
 .button2:active::after,
-.button3:active::after{
+.button3:active::after {
     padding: 0;
     margin: 0;
     opacity: 1;

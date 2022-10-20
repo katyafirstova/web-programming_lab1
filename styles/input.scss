@@ -85,34 +85,38 @@ input:focus ~ .highlight {
   animation: inputHighlighter 0.3s ease;
 }
 
-.form-control.success input{
+.form-control.success input {
   border-color: #2ecc71;
 }
-.form-control.error input{
+
+.form-control.error input {
   border-color: #e74c3c;
 }
 
-.form-control i{
+.form-control i {
   position: absolute;
   top: 70px;
   right: 10px;
   visibility: hidden;
 }
+
 .form-control.success i.fa-check-circle {
   color: #2ecc71;
   visibility: visible;
 }
+
 .form-control.error i.fa-exclamation-circle {
   color: red;
   visibility: visible;
 }
 
-.form-control small{
+.form-control small {
   visibility: hidden;
   margin-top: -225px;
-  margin-left:  20px;
+  margin-left: 20px;
 
 }
+
 .form-control.error small {
   color: red;
   visibility: visible;
